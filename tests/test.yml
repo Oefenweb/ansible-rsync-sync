@@ -4,3 +4,16 @@
   remote_user: root
   roles:
     - ../../
+  vars:
+    rsync_sync_scripts:
+      last-backup:
+        pre:
+          - 'ssh -q -t example.com "test ! -f /var/lock/mydumper-backup"'
+        rsync:
+          src: '-e ssh example.com:/data/backup/mydumper/'
+          dest: '/data/backup/mydumper'
+          options:
+            - '-aP'
+            - '--delete'
+        post:
+          - "mydumper-restore"
