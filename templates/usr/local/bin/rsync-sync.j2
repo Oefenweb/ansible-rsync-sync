@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#
+# {{ ansible_managed }}
+#
+# set -x;
+set -e;
+set -o pipefail;
+#
+thisFile="$(readlink -f "${0}")";
+thisFilePath="$(dirname "${thisFile}")";
+
+# pre
+{% for pre in item.value.pre | default([]) %}
+{{ pre }};
+{% endfor %}
+
+# sync
+rsync \
+{% for option in item.value.rsync.options | default([]) %}
+  {{ option }} \
+{% endfor %}
+  {{ item.value.rsync.src }} \
+  {{ item.value.rsync.dest }} \
+;
+
+# post
+{% for post in item.value.post | default([]) %}
+{{ post }};
+{% endfor %}

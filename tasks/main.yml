@@ -1,0 +1,21 @@
+# tasks file for rsync-sync
+---
+- name: install dependencies
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: true
+    cache_valid_time: 3600
+  with_items: rsync_sync_dependencies
+  tags: [configuration, rsync-sync, rsync-sync-dependencies]
+
+- name: generate script(s)
+  template:
+    src: usr/local/bin/rsync-sync.j2
+    dest: "{{ rsync_sync_install_path }}/{{ item.key }}"
+    owner: root
+    group: root
+    mode: 0755
+    validate: '/usr/bin/env bash -n %s'
+  with_dict: rsync_sync_scripts
+  tags: [configuration, rsync-sync, rsync-sync-configuration]
