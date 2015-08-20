@@ -1,0 +1,4 @@
+# defaults file for rsync-sync
+---
+rsync_sync_install_path: /usr/local/bin
+rsync_sync_scripts: []

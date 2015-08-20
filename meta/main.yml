@@ -1,0 +1,23 @@
+# meta file for rsync-sync
+---
+galaxy_info:
+  author: Mischa ter Smitten
+  company: Oefenweb.nl B.V.
+  description: Perform synchronization using rsync
+  license: MIT
+  min_ansible_version: 1.5
+  platforms:
+    - name: Ubuntu
+      versions:
+        - lucid
+        - precise
+        - trusty
+    - name: Debian
+      versions:
+        - squeeze
+        - wheezy
+        - jessie
+  categories:
+    - system
+    - networking
+dependencies: []
