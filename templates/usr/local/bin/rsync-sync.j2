@@ -11,7 +11,7 @@ thisFilePath="$(dirname "${thisFile}")";
 
 # pre
 {% for pre in item.value.pre | default([]) %}
-{{ pre }};
+{{ pre }}
 {% endfor %}
 
 # sync
@@ -25,5 +25,5 @@ rsync \
 
 # post
 {% for post in item.value.post | default([]) %}
-{{ post }};
+{{ post }}
 {% endfor %}
