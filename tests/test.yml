@@ -17,3 +17,7 @@
             - '--delete'
         post:
           - "mydumper-restore"
+    rsync_sync_jobs:
+      - name: last-backup
+        job: /usr/local/bin/last-backup
+        minute: "0"

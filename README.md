@@ -21,6 +21,16 @@ Perform synchronization using [rsync](https://rsync.samba.org/).
 * `rsync_sync_scripts.key.rsync.options`: [optional, default `[]`]: Options (e.g. `['--aP', '--delete']`)
 * `rsync_sync_scripts.key.post`: [optional, default `[]`]: Post sync commands
 
+* `rsync_sync_jobs`: [default: `[]`]: Sync jobs (scheduled by `cron.d`)
+* `rsync_sync_jobs.{n}.name`: [required]: Description of a crontab entry, should be unique, and changing the value will result in a new cron task being created (e.g. `last-backup`)
+* `rsync_sync_jobs.{n}.job`: [required]: The command to execute (e.g. `/usr/local/bin/last-backup`)
+* `rsync_sync_jobs.{n}.state`: [default: `present`]: Whether to ensure the job is present or absent
+* `rsync_sync_jobs.{n}.day`: [default: `*`]: Day of the month the job should run (`1-31`, `*`, `*/2`)
+* `rsync_sync_jobs.{n}.hour`: [default: `*`]: Hour when the job should run (e.g. `0-23`, `*`, `*/2`)
+* `rsync_sync_jobs.{n}.minute`: [default: `*`]: Minute when the job should run (e.g. `0-59`, `*`, `*/2`)
+* `rsync_sync_jobs.{n}.month`: [default: `*`]: Month of the year the job should run (e.g `1-12`, `*`, `*/2`)
+* `rsync_sync_jobs.{n}.weekday`: [default: `*`]: Day of the week that the job should run (e.g. `0-6` for Sunday-Saturday, `*`)
+
 ## Dependencies
 
 None
@@ -47,6 +57,10 @@ None
             - '--delete'
         post:
           - "mydumper-restore"
+    rsync_sync_jobs:
+      - name: last-backup
+        job: /usr/local/bin/last-backup
+        minute: "0"
 ```
 
 #### License

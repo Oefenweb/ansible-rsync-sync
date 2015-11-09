@@ -19,3 +19,18 @@
     validate: '/usr/bin/env bash -n %s'
   with_dict: rsync_sync_scripts
   tags: [configuration, rsync-sync, rsync-sync-configuration]
+
+- name: configure (cron) jobs
+  cron:
+    name: "{{ item.name }}"
+    job: "{{ item.job }}"
+    state: "{{ item.state | default('present') }}"
+    day: "{{ item.day | default('*') }}"
+    hour: "{{ item.hour | default('*') }}"
+    minute: "{{ item.minute | default('*') }}"
+    month: "{{ item.month | default('*') }}"
+    weekday: "{{ item.weekday | default('*') }}"
+    cron_file: rsync-sync
+    user: root
+  with_items: rsync_sync_jobs
+  tags: [configuration, rsync-sync, rsync-sync-jobs]
