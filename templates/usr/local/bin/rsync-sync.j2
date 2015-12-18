@@ -15,7 +15,7 @@ thisFilePath="$(dirname "${thisFile}")";
 {% endfor %}
 
 # sync
-rsync \
+{% if item.value.rsync.time | default(false) %}time {% endif %}rsync \
 {% for option in item.value.rsync.options | default([]) %}
   {{ option }} \
 {% endfor %}
