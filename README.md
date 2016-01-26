@@ -12,7 +12,7 @@ Perform synchronization using [rsync](https://rsync.samba.org/).
 
 * `rsync_sync_install_path`: [default: `/usr/local/bin`]: Install directory
 
-* `rsync_sync_scripts`: [default: `[]`]: Scripts declarations
+* `rsync_sync_scripts`: [default: `{}`]: Scripts declarations
 * `rsync_sync_scripts.key`: [required]: The name of the script (e.g. `last-backup`)
 * `rsync_sync_scripts.key.pre`: [optional, default `[]`]: Pre sync commands
 * `rsync_sync_scripts.key.rsync`: [required]: Rsync declarations
