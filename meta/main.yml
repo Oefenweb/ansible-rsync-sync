@@ -5,7 +5,7 @@ galaxy_info:
   company: Oefenweb.nl B.V.
   description: Perform synchronization using rsync
   license: MIT
-  min_ansible_version: 1.5
+  min_ansible_version: 1.6
   platforms:
     - name: Ubuntu
       versions:
