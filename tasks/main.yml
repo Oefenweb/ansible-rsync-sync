@@ -3,11 +3,14 @@
 - name: install dependencies
   apt:
     name: "{{ item }}"
-    state: latest
+    state: "{{ apt_install_state | default('latest') }}"
     update_cache: true
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
-  with_items: rsync_sync_dependencies
-  tags: [configuration, rsync-sync, rsync-sync-dependencies]
+  with_items: "{{ rsync_sync_dependencies }}"
+  tags:
+    - configuration
+    - rsync-sync
+    - rsync-sync-dependencies
 
 - name: generate script(s)
   template:
@@ -17,8 +20,11 @@
     group: root
     mode: 0755
     validate: '/usr/bin/env bash -n %s'
-  with_dict: rsync_sync_scripts
-  tags: [configuration, rsync-sync, rsync-sync-configuration]
+  with_dict: "{{ rsync_sync_scripts }}"
+  tags:
+    - configuration
+    - rsync-sync
+    - rsync-sync-configuration
 
 - name: configure (cron) jobs
   cron:
@@ -32,5 +38,8 @@
     weekday: "{{ item.weekday | default('*') }}"
     cron_file: rsync-sync
     user: root
-  with_items: rsync_sync_jobs
-  tags: [configuration, rsync-sync, rsync-sync-jobs]
+  with_items: "{{ rsync_sync_jobs }}"
+  tags:
+    - configuration
+    - rsync-sync
+    - rsync-sync-jobs
