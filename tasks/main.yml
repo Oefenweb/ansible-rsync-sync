@@ -12,6 +12,29 @@
     - rsync-sync
     - rsync-sync-dependencies
 
+- name: stat directories
+  stat:
+    path: "{{ item }}/"
+  register: _stat_directories
+  with_items:
+    - "{{ rsync_sync_required_paths }}"
+  tags:
+    - rsync-sync-configure-directories
+    - rsync-sync-configure-directories-stat
+
+- name: create directories
+  file:
+    path: "{{ item.item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items: "{{ _stat_directories.results }}"
+  when: item.stat is defined and item.stat.exists == false
+  tags:
+    - rsync-sync-configure-directories
+    - rsync-sync-configure-directories-create
+
 - name: generate script(s)
   template:
     src: usr/local/bin/rsync-sync.j2
@@ -24,7 +47,22 @@
   tags:
     - configuration
     - rsync-sync
-    - rsync-sync-configuration
+    - rsync-sync-configure
+    - rsync-sync-configure-scripts
+
+- name: generate x-from file(s)
+  template:
+    src: "{{ rsync_sync_configuration_path.lstrip('/') }}/x-from.j2"
+    dest: "{{ rsync_sync_configuration_path }}/{{ item.path }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0644') }}"
+  with_items: "{{ rsync_sync_x_from_files }}"
+  tags:
+    - configuration
+    - rsync-sync
+    - rsync-sync-configure
+    - rsync-sync-configure-x-from-files
 
 - name: configure (cron) jobs
   cron:
@@ -42,4 +80,5 @@
   tags:
     - configuration
     - rsync-sync
-    - rsync-sync-jobs
+    - rsync-sync-configure
+    - rsync-sync-configure-jobs

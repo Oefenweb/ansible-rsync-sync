@@ -2,3 +2,8 @@
 ---
 rsync_sync_dependencies:
   - rsync
+
+rsync_sync_configuration_path: /etc/rsync-sync
+rsync_sync_required_paths:
+  - "{{ rsync_sync_configuration_path }}"
+  - /etc/cron.d
