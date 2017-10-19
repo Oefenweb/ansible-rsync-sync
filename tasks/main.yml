@@ -19,6 +19,8 @@
   with_items:
     - "{{ rsync_sync_required_paths }}"
   tags:
+    - configuration
+    - rsync-sync
     - rsync-sync-configure-directories
     - rsync-sync-configure-directories-stat
 
@@ -32,6 +34,8 @@
   with_items: "{{ _stat_directories.results }}"
   when: item.stat is defined and item.stat.exists == false
   tags:
+    - configuration
+    - rsync-sync
     - rsync-sync-configure-directories
     - rsync-sync-configure-directories-create
 
