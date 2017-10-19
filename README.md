@@ -19,8 +19,15 @@ Perform synchronization using [rsync](https://rsync.samba.org/).
 * `rsync_sync_scripts.key.rsync.src`: [required]: The source directory
 * `rsync_sync_scripts.key.rsync.dest`: [required]: The destination directory
 * `rsync_sync_scripts.key.rsync.options`: [optional, default `[]`]: Options (e.g. `['--aP', '--delete']`)
-* `rsync_sync_scripts.key.rsync.time`: [optional, default `false`]: Whether or not to time the rsync command
+* `rsync_sync_scripts.key.rsync.time`: [optional, default `false`]: Whether or not to time the `rsync` command
 * `rsync_sync_scripts.key.post`: [optional, default `[]`]: Post sync commands
+
+* `rsync_sync_x_from_files`: [optional, default `[]`]: 
+* `rsync_sync_x_from_files.{n}.path`: [required]: 
+* `rsync_sync_x_from_files.{n}.owner`: [optional, default `[]`]: 
+* `rsync_sync_x_from_files.{n}.group`: [optional, default `[]`]: 
+* `rsync_sync_x_from_files.{n}.mode`: [optional, default `[]`]: 
+* `rsync_sync_x_from_files.{n}.content`: [optional, default `[]`]: 
 
 * `rsync_sync_jobs`: [default: `[]`]: Sync jobs (scheduled by `cron.d`)
 * `rsync_sync_jobs.{n}.name`: [required]: Description of a crontab entry, should be unique, and changing the value will result in a new cron task being created (e.g. `last-backup`)
@@ -57,11 +64,11 @@ None
             - '-aP'
             - '--delete'
         post:
-          - "mydumper-restore"
+          - mydumper-restore
     rsync_sync_jobs:
       - name: last-backup
         job: /usr/local/bin/last-backup
-        minute: "0"
+        minute: 0
 ```
 
 #### License
