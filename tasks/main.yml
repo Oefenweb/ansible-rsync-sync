@@ -11,7 +11,7 @@
     - rsync-sync
     - rsync-sync-dependencies
 
-- name: stat directories
+- name: "rsync-sync | Stat directories"
   stat:
     path: "{{ item }}/"
   register: _stat_directories
@@ -23,7 +23,7 @@
     - rsync-sync-configure-directories
     - rsync-sync-configure-directories-stat
 
-- name: create directories
+- name: "rsync-sync | Create directories"
   file:
     path: "{{ item.item }}"
     state: directory
@@ -38,7 +38,7 @@
     - rsync-sync-configure-directories
     - rsync-sync-configure-directories-create
 
-- name: generate script(s)
+- name: "rsync-sync | Generate script(s)"
   template:
     src: usr/local/bin/rsync-sync.j2
     dest: "{{ rsync_sync_install_path }}/{{ item.key }}"
@@ -53,7 +53,7 @@
     - rsync-sync-configure
     - rsync-sync-configure-scripts
 
-- name: generate x-from file(s)
+- name: "rsync-sync | Generate x-from file(s)"
   template:
     src: "{{ rsync_sync_configuration_path.lstrip('/') }}/x-from.j2"
     dest: "{{ rsync_sync_configuration_path }}/{{ item.path }}"
@@ -67,7 +67,7 @@
     - rsync-sync-configure
     - rsync-sync-configure-x-from-files
 
-- name: configure (cron) jobs
+- name: "rsync-sync | Configure (cron) jobs"
   cron:
     name: "{{ item.name }}"
     job: "{{ item.job }}"
