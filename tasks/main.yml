@@ -1,9 +1,9 @@
 # tasks file for rsync-sync
 ---
-- name: install dependencies
-  apt:
+- name: "rsync-sync | Install dependencies"
+  package:
     name: "{{ item }}"
-    state: "{{ apt_install_state | default('latest') }}"
+    state: "{{ pkg_install_state | default('latest') }}"
     update_cache: true
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
   with_items: "{{ rsync_sync_dependencies }}"
