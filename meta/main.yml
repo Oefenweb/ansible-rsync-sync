@@ -1,6 +1,7 @@
 # meta file for rsync-sync
 ---
 galaxy_info:
+  role_name: rsync-sync
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
   description: Perform synchronization using rsync
