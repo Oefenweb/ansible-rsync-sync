@@ -1,6 +1,7 @@
 ## rsync-sync
 
-[![Build Status](https://travis-ci.org/Oefenweb/ansible-rsync-sync.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-rsync-sync) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-rsync--sync-blue.svg)](https://galaxy.ansible.com/Oefenweb/rsync-sync)
+[![Build Status](https://travis-ci.org/Oefenweb/ansible-rsync-sync.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-rsync-sync)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-rsync--sync-blue.svg)](https://galaxy.ansible.com/Oefenweb/rsync-sync)
 
 Perform synchronization using [rsync](https://rsync.samba.org/).
 
@@ -22,7 +23,7 @@ Perform synchronization using [rsync](https://rsync.samba.org/).
 * `rsync_sync_scripts.key.rsync.time`: [optional, default `false`]: Whether or not to time the `rsync` command
 * `rsync_sync_scripts.key.post`: [optional, default `[]`]: Post sync commands
 
-* `rsync_sync_x_from_files`: [optional, default `[]`]: 
+* `rsync_sync_x_from_files`: [optional, default `[]`]:
 * `rsync_sync_x_from_files.{n}.path`: [required]: The remote path of the file (relative to `/etc/rsync-sync`)
 * `rsync_sync_x_from_files.{n}.owner`: [optional, default `root`]: The name of the user that should own the file
 * `rsync_sync_x_from_files.{n}.group`: [optional, default `root`]: The name of the group that should own the file

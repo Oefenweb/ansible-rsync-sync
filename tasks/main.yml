@@ -2,11 +2,10 @@
 ---
 - name: install dependencies
   apt:
-    name: "{{ item }}"
+    name: "{{ rsync_sync_dependencies }}"
     state: "{{ apt_install_state | default('latest') }}"
     update_cache: true
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
-  with_items: "{{ rsync_sync_dependencies }}"
   tags:
     - configuration
     - rsync-sync
@@ -32,7 +31,9 @@
     group: root
     mode: 0755
   with_items: "{{ _stat_directories.results }}"
-  when: item.stat is defined and item.stat.exists == false
+  when:
+    - item.stat is defined
+    - not item.stat.exists
   tags:
     - configuration
     - rsync-sync
