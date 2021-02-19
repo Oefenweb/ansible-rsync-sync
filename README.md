@@ -1,6 +1,6 @@
 ## rsync-sync
 
-[![Build Status](https://travis-ci.org/Oefenweb/ansible-rsync-sync.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-rsync-sync)
+[![CI](https://github.com/Oefenweb/ansible-rsync-sync/workflows/CI/badge.svg)](https://github.com/Oefenweb/ansible-rsync-sync/actions?query=workflow%3ACI)
 [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-rsync--sync-blue.svg)](https://galaxy.ansible.com/Oefenweb/rsync-sync)
 
 Perform synchronization using [rsync](https://rsync.samba.org/).
