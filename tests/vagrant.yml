@@ -1,4 +1,4 @@
-# test file for rsync-sync
+# test file
 ---
 - hosts: all
   remote_user: vagrant
