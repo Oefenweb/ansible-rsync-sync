@@ -2,7 +2,7 @@
 ---
 galaxy_info:
   namespace: oefenweb
-  role_name: rsync-sync
+  role_name: rsync_sync
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
   description: Perform synchronization using rsync
