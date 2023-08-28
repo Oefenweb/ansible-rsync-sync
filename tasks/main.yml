@@ -1,7 +1,7 @@
 # tasks file
 ---
 - name: install dependencies
-  apt:
+  ansible.builtin.apt:
     name: "{{ rsync_sync_dependencies }}"
     state: "{{ apt_install_state | default('latest') }}"
     update_cache: true
@@ -12,7 +12,7 @@
     - rsync-sync-dependencies
 
 - name: stat directories
-  stat:
+  ansible.builtin.stat:
     path: "{{ item }}/"
   register: _stat_directories
   with_items:
@@ -24,7 +24,7 @@
     - rsync-sync-configure-directories-stat
 
 - name: create directories
-  file:
+  ansible.builtin.file:
     path: "{{ item.item }}"
     state: directory
     owner: root
@@ -41,7 +41,7 @@
     - rsync-sync-configure-directories-create
 
 - name: generate script(s)
-  template:
+  ansible.builtin.template:
     src: usr/local/bin/rsync-sync.j2
     dest: "{{ rsync_sync_install_path }}/{{ item.key }}"
     owner: root
@@ -56,7 +56,7 @@
     - rsync-sync-configure-scripts
 
 - name: generate x-from file(s)
-  template:
+  ansible.builtin.template:
     src: "{{ rsync_sync_configuration_path.lstrip('/') }}/x-from.j2"
     dest: "{{ rsync_sync_configuration_path }}/{{ item.path }}"
     owner: "{{ item.owner | default('root') }}"
@@ -70,7 +70,7 @@
     - rsync-sync-configure-x-from-files
 
 - name: configure (cron) jobs
-  cron:
+  ansible.builtin.cron:
     name: "{{ item.name }}"
     job: "{{ item.job }}"
     state: "{{ item.state | default('present') }}"
