@@ -52,7 +52,7 @@ None
 ---
 - hosts: all
   roles:
-   - rsync-sync
+   - oefenweb.rsync-sync
   vars:
     rsync_sync_scripts:
       last-backup:
