@@ -20,7 +20,7 @@ Perform synchronization using [rsync](https://rsync.samba.org/).
 * `rsync_sync_scripts.key.rsync.src`: [required]: The source directory
 * `rsync_sync_scripts.key.rsync.dest`: [required]: The destination directory
 * `rsync_sync_scripts.key.rsync.options`: [optional, default `[]`]: Options (e.g. `['--aP', '--delete']`)
-* `rsync_sync_scripts.key.rsync.time`: [optional, default `false`]: Whether or not to time the `rsync` command
+* `rsync_sync_scripts.key.rsync.time`: [optional, default `false`]: Whether to time the `rsync` command
 * `rsync_sync_scripts.key.post`: [optional, default `[]`]: Post sync commands
 
 * `rsync_sync_x_from_files`: [optional, default `[]`]:
